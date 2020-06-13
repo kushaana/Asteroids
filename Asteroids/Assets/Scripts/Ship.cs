@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Ship : MonoBehaviour
 {
+    [SerializeField]
+    GameObject bulletPrefab;
+
     Rigidbody2D rb2d;
     Vector2 thrustDirection = new Vector2(1.0f, 0.0f);
     const int ThrustForce = 5;
-    float rotateDegreesPerSecond=180;
+    float rotateDegreesPerSecond=270;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +27,13 @@ public class Ship : MonoBehaviour
         Vector3 eAng = transform.eulerAngles;
         thrustDirection.x = Mathf.Cos(Mathf.Deg2Rad * eAng.z);
         thrustDirection.y = Mathf.Sin(Mathf.Deg2Rad * eAng.z);
+
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            GameObject bullet = Instantiate(bulletPrefab);
+            bullet.transform.position = gameObject.transform.position;
+            bullet.GetComponent<Bullet>().ApplyForce(thrustDirection);
+        }
 
     }
 
