@@ -6,6 +6,8 @@ public class Ship : MonoBehaviour
 {
     [SerializeField]
     GameObject bulletPrefab;
+    [SerializeField]
+    GameObject HUD;
 
     Rigidbody2D rb2d;
     Vector2 thrustDirection = new Vector2(1.0f, 0.0f);
@@ -33,6 +35,7 @@ public class Ship : MonoBehaviour
             GameObject bullet = Instantiate(bulletPrefab);
             bullet.transform.position = gameObject.transform.position;
             bullet.GetComponent<Bullet>().ApplyForce(thrustDirection);
+            AudioManager.Play(AudioClipName.PlayerShot);
         }
 
     }
@@ -48,6 +51,8 @@ public class Ship : MonoBehaviour
 
      void OnCollisionEnter2D(Collision2D collision)
     {
+        AudioManager.Play(AudioClipName.PlayerDeath);
+        HUD.GetComponent<HUD>().StopGameTimer();
         Destroy(gameObject);
     }
 

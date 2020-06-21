@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Asteroid : MonoBehaviour
 {
@@ -20,11 +22,22 @@ public class Asteroid : MonoBehaviour
         float magnitude = Random.Range(MinImpulseForce, MaxImpulseForce);
         GetComponent<Rigidbody2D>().AddForce(moveDirection * magnitude, ForceMode2D.Impulse);
     }
+
+    public void Initialize(float angle)
+    {
+        const float MinImpulseForce = 1.5f;
+        const float MaxImpulseForce = 2.5f;
+        float magnitude = Random.Range(MinImpulseForce, MaxImpulseForce);
+        Vector2 moveDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+        
+        GetComponent<Rigidbody2D>().AddForce(moveDirection * magnitude, ForceMode2D.Impulse);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         SpriteRenderer sp = GetComponent<SpriteRenderer>();
-        sp.sprite = asteroid[Random.Range(0, 3)];
+        sp.sprite = asteroid[UnityEngine.Random.Range(0, 3)];
 
     }
 
@@ -32,8 +45,26 @@ public class Asteroid : MonoBehaviour
     {
         if(collision.gameObject.tag == "Bullet")
         {
-            Destroy(collision.gameObject);
-            Destroy(gameObject);
+            AudioManager.Play(AudioClipName.AsteroidHit);
+            Vector3 localscale = transform.localScale;
+            if(localscale.x < 0.5)
+            {
+                Destroy(gameObject);
+                Destroy(collision.gameObject);
+            }
+            else
+            {
+                localscale.x /= 2;
+                localscale.y /= 2;
+                transform.localScale = localscale;
+
+                GameObject copy1 = Instantiate(gameObject);
+                GameObject copy2 = Instantiate(gameObject);
+                copy1.GetComponent<Asteroid>().Initialize(Random.Range(0, 2 * (float)Math.PI));
+                copy2.GetComponent<Asteroid>().Initialize(Random.Range(0, 2 * (float)Math.PI));
+                Destroy(gameObject);
+                Destroy(collision.gameObject);
+            } 
         }
     }
 }

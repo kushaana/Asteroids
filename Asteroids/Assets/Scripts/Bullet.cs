@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    float killTime = 2f;
+    float killTime = 1f;
     Timer deathTimer;
     public void ApplyForce(Vector2 forceDirection)
     {
-        const float forceMagnitude = 5f;
+        const float forceMagnitude = 7f;
         GetComponent<Rigidbody2D>().AddForce(forceMagnitude * forceDirection, ForceMode2D.Impulse);
     }
     // Start is called before the first frame update
