@@ -1,4 +1,2 @@
-# Asteroids-in-Unity
-My version of Asteroids game released by Atari in 1979
+# Game-Development-in-Unity
 
-Download Build.rar and open index.html file with Firefox/Edge explorer to play game.
