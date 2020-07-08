@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4047221995157429361}
   - component: {fileID: 4047221995157429362}
   - component: {fileID: 4047221995157429360}
-  - component: {fileID: 736262939498715095}
+  - component: {fileID: -3224140056720057439}
   m_Layer: 0
   m_Name: StandardBlock
   m_TagString: Untagged
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4047221995157429363}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.14, y: 2.5, z: 0}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -109,7 +109,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.81615037, y: 0.24607468}
   m_EdgeRadius: 0
---- !u!114 &736262939498715095
+--- !u!114 &-3224140056720057439
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,6 +118,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4047221995157429363}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4224766ef1754644fb76ba2f4234cfe3, type: 3}
+  m_Script: {fileID: 11500000, guid: 2650550fff2e3a149a1ec1770ba10532, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bricksprite:
+  - {fileID: 21300000, guid: eb4369f69b75b9c46bf2d05427af07ac, type: 3}
+  - {fileID: 21300000, guid: 094f34de389dab647ae2fdab50374d9f, type: 3}
+  - {fileID: 21300000, guid: 64ce0280e7e7d2d4c807a7325820e928, type: 3}
+  - {fileID: 21300000, guid: 7db7bed00d2379946b4244cc4d90cdd1, type: 3}

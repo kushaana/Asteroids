@@ -24,6 +24,54 @@ public static class ConfigurationUtils
     {
         get { return configurationData.BallImpulseForce; }
     }
+
+    public static float BallLifeTime
+    {
+        get { return configurationData.BallLifeTime; }
+    }
+
+    public static float MinRandomSpawnTime
+    {
+        get { return configurationData.MinRandomSpawnTime; }
+    }
+
+    public static float MaxRandomSpawnTime
+    {
+        get { return configurationData.MaxRandomSpawnTime; }
+    }
+
+    public static float StdBlockPoints
+    {
+        get { return configurationData.StdBlockPoints; }
+    }
+
+    public static float BonusBlockPoints
+    {
+        get { return configurationData.BonusBlockPoints; }
+    }
+
+    public static float PickupBlockPoints
+    {
+        get { return configurationData.PickupBlockPoints; }
+    }
+
+    public static float StdBlockProbability
+    {
+        get { return configurationData.StdBlockProbability; }
+    }
+    public static float BonusBlockProbability
+    {
+        get { return configurationData.BonusBlockProbability; }
+    }
+    public static float PickupBlockProbability
+    {
+        get { return configurationData.PickupBlockProbability; }
+    }
+
+    public static float BallsPerGame
+    {
+        get { return configurationData.BallsPerGame; }
+    }
     #endregion
 
     /// <summary>

@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class Brick : MonoBehaviour
 {
+    protected float points;
+    GameObject hud;
+    HUD hudScript;
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
-        
+        hud = GameObject.FindWithTag("HUD");
+        hudScript = hud.GetComponent<HUD>();
     }
 
     // Update is called once per frame
@@ -16,10 +20,11 @@ public class Brick : MonoBehaviour
         
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    public virtual void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ball"))
         {
+            hudScript.AddPoints(points);
             Destroy(gameObject);
         }
     }
