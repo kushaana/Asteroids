@@ -26,6 +26,9 @@ public class ConfigurationData
     static float bonusBlockProbability = 0.2f;
     static float pickupBlockProbability = 0.1f;
     static float ballsPerGame = 5;
+    static float freezeTime = 2;
+    static float speedUpTime = 2;
+    static float speedUpFactor = 2;
 
 
     #endregion
@@ -101,6 +104,21 @@ public class ConfigurationData
     {
         get { return ballsPerGame; }
     }
+
+    public float FreezeTime
+    {
+        get { return freezeTime; }
+    }
+
+    public float SpeedUpTime
+    {
+        get { return speedUpTime; }
+    }
+
+    public float SpeedUpFactor
+    {
+        get { return speedUpFactor; }
+    } 
     #endregion
 
     #region Constructor
@@ -151,6 +169,9 @@ public class ConfigurationData
         bonusBlockProbability = float.Parse(values[9]);
         pickupBlockProbability = float.Parse(values[10]);
         ballsPerGame = float.Parse(values[11]);
+        freezeTime = float.Parse(values[12]);
+        speedUpTime = float.Parse(values[13]);
+        speedUpFactor = float.Parse(values[14]);
     }
     #endregion
 }

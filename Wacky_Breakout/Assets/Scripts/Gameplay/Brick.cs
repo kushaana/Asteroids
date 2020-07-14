@@ -8,7 +8,7 @@ public class Brick : MonoBehaviour
     GameObject hud;
     HUD hudScript;
     // Start is called before the first frame update
-    public virtual void Start()
+    protected virtual void Start()
     {
         hud = GameObject.FindWithTag("HUD");
         hudScript = hud.GetComponent<HUD>();
@@ -20,9 +20,9 @@ public class Brick : MonoBehaviour
         
     }
 
-    public virtual void OnCollisionEnter2D(Collision2D collision)
+    protected virtual void OnCollisionEnter2D(Collision2D other)
     {
-        if (collision.gameObject.CompareTag("Ball"))
+        if (other.gameObject.CompareTag("Ball"))
         {
             hudScript.AddPoints(points);
             Destroy(gameObject);

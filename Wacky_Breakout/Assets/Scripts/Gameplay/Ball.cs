@@ -9,6 +9,8 @@ public class Ball : MonoBehaviour
     Timer timer;
     Timer spawntimer;
     bool moving;
+    bool speedrestored;
+    Timer speedUpTimer;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,10 @@ public class Ball : MonoBehaviour
         spawntimer.Duration = 1;
         spawntimer.Run();
         moving = false;
+
+        speedUpTimer = gameObject.AddComponent<Timer>();
+        EventManager.AddSpeedUpEventListener(speedUp);
+        speedrestored = true;
     }
 
     // Update is called once per frame
@@ -39,14 +45,34 @@ public class Ball : MonoBehaviour
 
             GetComponent<Rigidbody2D>().AddForce(force, ForceMode2D.Impulse);
             moving = true;
+
         }
 
-        GetComponent<Rigidbody2D>().velocity = 7 * GetComponent<Rigidbody2D>().velocity.normalized;
+        if(speedUpTimer.Finished && !speedrestored)
+        {
+            GetComponent<Rigidbody2D>().velocity /= ConfigurationUtils.SpeedUpFactor;
+            speedrestored = true;
+        }
 
+        Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
+        if(speedrestored)
+        rigidbody.velocity = 4 * (rigidbody.velocity.normalized);
+        
     }
 
     public void SetDirection(Vector2 direction)
     {
         GetComponent<Rigidbody2D>().velocity = direction * GetComponent<Rigidbody2D>().velocity.magnitude;
+    }
+
+    public void speedUp(float speedUpDuration, float speedUpFactor)
+    {
+        if (!speedUpTimer.Running)
+        {
+            GetComponent<Rigidbody2D>().velocity *= speedUpFactor;
+            speedUpTimer.Duration = speedUpDuration;
+            speedUpTimer.Run();
+            speedrestored = false;
+        }
     }
 }

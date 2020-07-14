@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 /// <summary>
@@ -71,6 +72,20 @@ public static class ConfigurationUtils
     public static float BallsPerGame
     {
         get { return configurationData.BallsPerGame; }
+    }
+
+    public static float FreezeTime
+    {
+        get { return configurationData.FreezeTime; }
+    }
+
+    public static float SpeedUpTime
+    {
+        get { return configurationData.SpeedUpTime; }
+    }
+    public static float SpeedUpFactor 
+    {
+        get { return configurationData.SpeedUpFactor; }
     }
     #endregion
 

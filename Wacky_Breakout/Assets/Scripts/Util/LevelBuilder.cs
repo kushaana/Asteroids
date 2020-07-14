@@ -53,12 +53,6 @@ public class LevelBuilder : MonoBehaviour
 			{
 				spawnPosition = new Vector2(spawnBlockStartX, spawnBlockStartY);
 				int randomBlockIndex = randomBlock.choose(probabilityArray);
-				if(randomBlockIndex == 2)
-                {
-					int pickuptype = Random.Range(0, 2);
-					if (pickuptype == 1) brick[randomBlockIndex].GetComponent<PickupBrick>().Effect = PickupEffect.Freezer;
-					else brick[randomBlockIndex].GetComponent<PickupBrick>().Effect = PickupEffect.Speedup;
-				}
 				Instantiate(brick[randomBlockIndex],spawnPosition,Quaternion.identity);
 				spawnBlockStartX += standardBrickWidth;
 			}
