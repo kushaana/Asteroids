@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BallSpawner : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class BallSpawner : MonoBehaviour
     Vector2 ballDownLeftCorner;
     Vector2 ballUpRightCorner;
     bool retrySpawn = false;
+    public ReduceBallsLeft reduceBallsEvent;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +32,8 @@ public class BallSpawner : MonoBehaviour
         randomspawner = gameObject.AddComponent<Timer>();
         RunRandomSpawner(randomspawner);
 
+        reduceBallsEvent = new ReduceBallsLeft();
+        EventManager.AddReduceBallsEventInvoker(this);
     }
 
     // Update is called once per frame
@@ -59,7 +63,7 @@ public class BallSpawner : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        GameObject.FindWithTag("HUD").GetComponent<HUD>().BallLeft();
+        reduceBallsEvent.Invoke();
         Destroy(collision.gameObject);
         Initialize();
     }
@@ -69,5 +73,10 @@ public class BallSpawner : MonoBehaviour
         randomSpawnTime = Random.Range(minSpawnTime, maxSpawnTime);
         randomspawner.Duration = randomSpawnTime;
         randomspawner.Run();
+    }
+
+    public void AddReduceBallsEventListener(UnityAction reduceBallsEventHandler)
+    {
+        reduceBallsEvent.AddListener(reduceBallsEventHandler);
     }
 }

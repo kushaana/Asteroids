@@ -9,6 +9,10 @@ public static class EventManager
     static List<UnityAction<float>> freezeEffectListeners = new List<UnityAction<float>>();
 	static List<PickupBrick> speedUpEventInvokers = new List<PickupBrick>();
 	static List<UnityAction<float, float>> speedUpEventListeners = new List<UnityAction<float, float>>();
+	static List<Brick> addPointsEventInvokers = new List<Brick>();
+	static List<UnityAction<float>> addPointsEventListeners = new List<UnityAction<float>>();
+	static List<BallSpawner> reduceBallsEventInvokers = new List<BallSpawner>();
+	static List<UnityAction> reduceBallsEventListeners = new List<UnityAction>();
 	public static void AddFreezeInvoker(PickupBrick invoker)
 	{
 		freezeEffectInvokers.Add(invoker);
@@ -39,6 +43,40 @@ public static class EventManager
 		foreach(PickupBrick speedUpInvoker in speedUpEventInvokers)
 		{
 			speedUpInvoker.AddSpeedUpEventListener(speedUpEventHandler);
+		}
+	}
+
+	public static void AddPointsEventInvoker(Brick invoker)
+	{
+		addPointsEventInvokers.Add(invoker);
+		foreach (UnityAction<float> addPointsListener in addPointsEventListeners)
+		{
+			invoker.AddPointsEventListener(addPointsListener);
+		}
+	}
+	public static void AddPointsEventListener(UnityAction<float> addPointsEventHandler)
+	{
+		addPointsEventListeners.Add(addPointsEventHandler);
+		foreach (Brick addPointsInvoker in addPointsEventInvokers)
+		{
+			addPointsInvoker.AddPointsEventListener(addPointsEventHandler);
+		}
+	}
+
+	public static void AddReduceBallsEventInvoker(BallSpawner invoker)
+	{
+		reduceBallsEventInvokers.Add(invoker);
+		foreach (UnityAction reduceBallsListener in reduceBallsEventListeners)
+		{
+			invoker.AddReduceBallsEventListener(reduceBallsListener);
+		}
+	}
+	public static void AddReduceBallsEventListener(UnityAction reduceBallsEventHandler)
+	{
+		reduceBallsEventListeners.Add(reduceBallsEventHandler);
+		foreach (BallSpawner reduceBallsInvoker in reduceBallsEventInvokers)
+		{
+			reduceBallsInvoker.AddReduceBallsEventListener(reduceBallsEventHandler);
 		}
 	}
 }

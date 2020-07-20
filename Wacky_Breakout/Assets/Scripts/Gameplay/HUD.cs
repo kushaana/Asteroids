@@ -18,6 +18,8 @@ public class HUD : MonoBehaviour
     {
         balls = ConfigurationUtils.BallsPerGame;
         Balls.text = "Balls left: " + balls.ToString();
+        EventManager.AddPointsEventListener(AddPoints);
+        EventManager.AddReduceBallsEventListener(BallLeft);
     }
 
     // Update is called once per frame
@@ -26,13 +28,13 @@ public class HUD : MonoBehaviour
         
     }
 
-    public void AddPoints(float points)
+    void AddPoints(float points)
     {
         score += points;
         Score.text = "Score: " + score.ToString();
     }
 
-    public void BallLeft()
+    void BallLeft()
     {
         balls--;
         Balls.text = "Balls left: " + balls.ToString();

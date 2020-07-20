@@ -1,17 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Brick : MonoBehaviour
 {
     protected float points;
-    GameObject hud;
-    HUD hudScript;
+    public AddPoints addPointsEvent;
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        hud = GameObject.FindWithTag("HUD");
-        hudScript = hud.GetComponent<HUD>();
+        addPointsEvent = new AddPoints();
+        EventManager.AddPointsEventInvoker(this);
     }
 
     // Update is called once per frame
@@ -24,8 +24,13 @@ public class Brick : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ball"))
         {
-            hudScript.AddPoints(points);
+            addPointsEvent.Invoke(points);
             Destroy(gameObject);
         }
+    }
+
+    public void AddPointsEventListener(UnityAction<float> addPointsHandler)
+    {
+        addPointsEvent.AddListener(addPointsHandler);
     }
 }
