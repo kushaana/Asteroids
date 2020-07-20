@@ -22,6 +22,7 @@ public class Brick : MonoBehaviour
 
     protected virtual void OnCollisionEnter2D(Collision2D other)
     {
+        AudioManager.Play(AudioClipName.HitBrick);
         if (other.gameObject.CompareTag("Ball"))
         {
             addPointsEvent.Invoke(points);

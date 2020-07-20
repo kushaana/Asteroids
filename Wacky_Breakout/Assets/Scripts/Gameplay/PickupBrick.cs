@@ -51,10 +51,12 @@ public class PickupBrick : Brick
     { 
         if (Effect == PickupEffect.Freezer)
         {
+            AudioManager.Play(AudioClipName.HitFreezer);
             freezerEffect.Invoke(ConfigurationUtils.FreezeTime);
         }
         if (Effect == PickupEffect.Speedup)
         {
+            AudioManager.Play(AudioClipName.HitSpeedUp);
             speedUpEvent.Invoke(ConfigurationUtils.SpeedUpTime, ConfigurationUtils.SpeedUpFactor);
         }
         base.OnCollisionEnter2D(other);

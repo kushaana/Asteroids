@@ -13,6 +13,8 @@ public static class EventManager
 	static List<UnityAction<float>> addPointsEventListeners = new List<UnityAction<float>>();
 	static List<BallSpawner> reduceBallsEventInvokers = new List<BallSpawner>();
 	static List<UnityAction> reduceBallsEventListeners = new List<UnityAction>();
+	static List<HUD> lastBallLostEventInvokers = new List<HUD>();
+	static List<UnityAction> lastBallLostEventListeners = new List<UnityAction>();
 	public static void AddFreezeInvoker(PickupBrick invoker)
 	{
 		freezeEffectInvokers.Add(invoker);
@@ -77,6 +79,23 @@ public static class EventManager
 		foreach (BallSpawner reduceBallsInvoker in reduceBallsEventInvokers)
 		{
 			reduceBallsInvoker.AddReduceBallsEventListener(reduceBallsEventHandler);
+		}
+	}
+
+	public static void AddLastBallLostEventInvoker(HUD invoker)
+	{
+		lastBallLostEventInvokers.Add(invoker);
+		foreach (UnityAction lastBallLostListener in lastBallLostEventListeners)
+		{
+			invoker.AddLastBallLostEventListener(lastBallLostListener);
+		}
+	}
+	public static void AddLastBallLostEventListener(UnityAction lastBallLostEventHandler)
+	{
+		lastBallLostEventListeners.Add(lastBallLostEventHandler);
+		foreach (HUD lastBallLostInvoker in lastBallLostEventInvokers)
+		{
+			lastBallLostInvoker.AddLastBallLostEventListener(lastBallLostEventHandler);
 		}
 	}
 }

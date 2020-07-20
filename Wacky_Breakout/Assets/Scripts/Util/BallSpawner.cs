@@ -63,6 +63,7 @@ public class BallSpawner : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        AudioManager.Play(AudioClipName.LostBall);
         reduceBallsEvent.Invoke();
         Destroy(collision.gameObject);
         Initialize();

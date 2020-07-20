@@ -8,6 +8,8 @@ TagManager:
   - HUD
   - MainMenuCanvas
   - HelpMenuCanvas
+  - FinalScore
+  - Brick
   layers:
   - Default
   - TransparentFX

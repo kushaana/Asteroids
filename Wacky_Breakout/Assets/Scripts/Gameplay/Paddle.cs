@@ -52,7 +52,7 @@ public class Paddle : MonoBehaviour
     /// <param name="coll">collision info</param>
     void OnCollisionEnter2D(Collision2D coll)
     {
-        
+        AudioManager.Play(AudioClipName.HitPaddle);
         if (coll.gameObject.CompareTag("Ball") && IsTop(coll))
         {           
             // calculate new ball direction
